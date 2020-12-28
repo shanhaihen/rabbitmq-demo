@@ -14,6 +14,18 @@ public class TestRabbitMQ {
     private RabbitTemplate rabbitTemplate;
 
     /**
+     * fanout 广播
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public void fanOutTest() {
+        for (int i = 0; i < 10; i++) {
+            rabbitTemplate.convertAndSend("fanout1", "", i + "fanout 模型发送的消息");
+        }
+    }
+
+    /**
      * 生产者不创建队列
      */
     @Test
@@ -25,9 +37,8 @@ public class TestRabbitMQ {
      * 生产者不创建队列
      */
     @Test
-    public void workQueueTest() throws InterruptedException {
+    public void workQueueTest() {
         for (int i = 0; i < 10; i++) {
-            Thread.sleep(2000);
             System.out.println("=================>>>::" + i);
             rabbitTemplate.convertAndSend("spring_work1", i + "hello world");
         }
