@@ -15,6 +15,18 @@ public class SpringBootRabbitMQTest {
 
 
     /**
+     * topic 动态路由 订阅模式
+     */
+    @Test
+    public void topicTest() {
+        rabbitTemplate.convertAndSend("topic1", "user", "topic模型发送的[user]消息");
+        rabbitTemplate.convertAndSend("topic1", "user.save", "topic模型发送的[user.save]消息");
+        rabbitTemplate.convertAndSend("topic1", "user.save.query", "topic 模型发送的[user.save.query]消息");
+        rabbitTemplate.convertAndSend("topic1", "order", "topic模型发送的[order]消息");
+    }
+
+
+    /**
      * route 路由模式
      */
     @Test
