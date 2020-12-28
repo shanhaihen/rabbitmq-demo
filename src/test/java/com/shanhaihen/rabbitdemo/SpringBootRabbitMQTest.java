@@ -9,9 +9,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest(classes = RabbitDemoApplication.class)
 @RunWith(SpringRunner.class)
-public class TestRabbitMQ {
+public class SpringBootRabbitMQTest {
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
+
+    /**
+     * route 路由模式
+     */
+    @Test
+    public void routeTest() {
+        rabbitTemplate.convertAndSend("route1", "info", "route1 模型发送的[info]消息");
+        rabbitTemplate.convertAndSend("route1", "error", "route1 模型发送的[error]消息");
+    }
+
 
     /**
      * fanout 广播
